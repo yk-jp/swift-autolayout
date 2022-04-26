@@ -44,6 +44,54 @@ class ViewController: UIViewController {
     butt.addTarget(self, action: #selector(landscapeTapped), for: .touchUpInside)
     return butt
   }()
+    
+  let purpleBox: UIView = {
+    let box = UIView()
+    box.frame = CGRect.zero
+    box.translatesAutoresizingMaskIntoConstraints = false
+    box.backgroundColor = .purple
+    return box
+  }()
+    
+  let blueBox1: UIView = {
+    let box = UIView()
+    box.frame = CGRect.zero
+    box.translatesAutoresizingMaskIntoConstraints = false
+    box.backgroundColor = .blue
+    return box
+  }()
+  
+  let blueBox2: UIView = {
+    let box = UIView()
+    box.frame = CGRect.zero
+    box.translatesAutoresizingMaskIntoConstraints = false
+    box.backgroundColor = .blue
+    return box
+  }()
+
+  let blueBox3: UIView = {
+    let box = UIView()
+    box.frame = CGRect.zero
+    box.translatesAutoresizingMaskIntoConstraints = false
+    box.backgroundColor = .blue
+    return box
+  }()
+    
+  let orangeBox1: UIView = {
+    let box = UIView()
+    box.frame = CGRect.zero
+    box.translatesAutoresizingMaskIntoConstraints = false
+    box.backgroundColor = .orange
+    return box
+  }()
+    
+  let orangeBox2: UIView = {
+    let box = UIView()
+    box.frame = CGRect.zero
+    box.translatesAutoresizingMaskIntoConstraints = false
+    box.backgroundColor = .orange
+    return box
+  }()
   
   var widthAnchor: NSLayoutConstraint?
   var heightAnchor: NSLayoutConstraint?
@@ -78,6 +126,76 @@ class ViewController: UIViewController {
       buttStackView.heightAnchor.constraint(equalToConstant: 50),
       buttStackView.widthAnchor.constraint(equalTo: view.widthAnchor)
       ])
+      
+    // add purple box
+    mainView.addSubview(purpleBox)
+    // set constraint
+    NSLayoutConstraint.activate([
+      purpleBox.bottomAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+      purpleBox.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -20),
+      purpleBox.heightAnchor.constraint(equalToConstant: 50),
+      purpleBox.widthAnchor.constraint(equalTo: mainView.widthAnchor, multiplier: 0.6)
+    ])
+      
+    // not working properly
+    //    let blueBox2 = blueBox1
+    //    let blueBox3 = blueBox2
+      
+    let blueBoxStackView = UIStackView(arrangedSubviews: [
+        blueBox1, blueBox2, blueBox3
+    ])
+      
+    for box in blueBoxStackView.arrangedSubviews {
+        NSLayoutConstraint.activate([
+            box.heightAnchor.constraint(equalToConstant: 50),
+            box.widthAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+      
+    blueBoxStackView.translatesAutoresizingMaskIntoConstraints = false
+    blueBoxStackView.axis = .vertical
+    blueBoxStackView.alignment = .center
+    blueBoxStackView.distribution = .equalSpacing
+    blueBoxStackView.spacing = 20
+    
+    mainView.addSubview(blueBoxStackView)
+      
+    NSLayoutConstraint.activate([
+      blueBoxStackView.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
+      blueBoxStackView.centerYAnchor.constraint(equalTo: mainView.centerYAnchor),
+      blueBoxStackView.heightAnchor.constraint(equalTo: mainView.heightAnchor,multiplier:0.5),
+    ])
+      
+    let redBoxStackView = UIStackView(arrangedSubviews: [
+        orangeBox1, orangeBox2
+    ])
+      
+    for (idx, box) in redBoxStackView.arrangedSubviews.enumerated() {
+      let height:CGFloat = 30
+      let width:CGFloat = idx != redBoxStackView.arrangedSubviews.count - 1 ? 40 : 50
+      NSLayoutConstraint.activate([
+        box.heightAnchor.constraint(equalToConstant: height),
+        box.widthAnchor.constraint(equalToConstant: width)
+    ])
+    }
+      
+    redBoxStackView.translatesAutoresizingMaskIntoConstraints = false
+    redBoxStackView.axis = .horizontal
+    redBoxStackView.alignment = .center
+    redBoxStackView.distribution = .equalSpacing
+    redBoxStackView.spacing = UIStackView.spacingUseSystem
+    redBoxStackView.isLayoutMarginsRelativeArrangement = true
+    redBoxStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+    redBoxStackView.backgroundColor = .red
+    
+    mainView.addSubview(redBoxStackView)
+      
+    NSLayoutConstraint.activate([
+      redBoxStackView.topAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.topAnchor, constant: 50),
+      redBoxStackView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -20),
+      redBoxStackView.heightAnchor.constraint(equalToConstant: 50),
+    ])
+      
   }
 
   @objc private func squareTapped() {
